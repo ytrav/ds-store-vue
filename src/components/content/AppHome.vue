@@ -4,7 +4,7 @@
             <div class="categories">
                 <h2>Categories</h2>
                 <div class="list">
-                    <router-link class="item" v-for="item in items" :key="item" :to="item.path">
+                    <router-link class="item" v-for="item in $store.state.items" :key="item" :to="item.path">
                         <span>{{ item.name }}</span>
                         <mdicon name="chevron-right" size="20" />
                     </router-link>
@@ -28,7 +28,7 @@
         <div class="best-deals">
             <h2>Best Deals</h2>
             <div class="deals-flex">
-                <router-link :to="deal.route" class="deal" v-for="deal in deals" :key="deal">
+                <router-link :to="deal.route" class="deal" v-for="deal in $store.state.deals" :key="deal">
                     <img :src="deal.imagePath" :alt="deal.productName">
                     <span>{{ deal.productName }}</span>
                     <span>${{ deal.price }}</span>
@@ -51,88 +51,8 @@ export default {
     methods: {},
     data() {
         return {
-            items: [
-                {
-                    name: 'Phones',
-                    path: '/phones',
-                },
-                {
-                    name: 'Tablets',
-                    path: '/tablets',
-                },
-                {
-                    name: 'Laptops',
-                    path: '/laptops',
-                },
-                {
-                    name: 'Television',
-                    path: '/tv',
-                },
-                {
-                    name: 'Accessories',
-                    path: '/accessories',
-                },
-                {
-                    name: 'Browse all',
-                    path: '/all',
-                },
-            ],
-            deals: [
-                {
-                    productName: 'Apple MacBook Pro 13" 2020',
-                    price: 1299,
-                    imagePath: require(`../../assets/apple-macbook-2020-13in-silver.png`),
-                    route: '/product/apple-macbook-pro-13-2020',
-                },
-                {
-                    productName: 'Google Pixelbook Go',
-                    price: 699,
-                    imagePath: require(`../../assets/google-pixelbook-go.png`),
-                    route: '/product/google-pixelbook-go',
-                },
-                {
-                    productName: 'Microsoft Surface Go 2',
-                    price: 499,
-                    imagePath: require(`../../assets/microsoft-surface-go-2.png`),
-                    route: '/product/microsoft-surface-go-2',
-                },
-                {
-                    productName: 'Template',
-                    price: 999,
-                    imagePath: require(`../../assets/apple-macbook-2020-13in-silver.png`),
-                    route: '/product/apple-macbook-pro-13-2020',
-                },
-                {
-                    productName: 'Template',
-                    price: 999,
-                    imagePath: require(`../../assets/apple-macbook-2020-13in-silver.png`),
-                    route: '/product/apple-macbook-pro-13-2020',
-                },
-                {
-                    productName: 'Template',
-                    price: 999,
-                    imagePath: require(`../../assets/apple-macbook-2020-13in-silver.png`),
-                    route: '/product/apple-macbook-pro-13-2020',
-                },
-                {
-                    productName: 'Template',
-                    price: 999,
-                    imagePath: require(`../../assets/apple-macbook-2020-13in-silver.png`),
-                    route: '/product/apple-macbook-pro-13-2020',
-                },
-                {
-                    productName: 'Template',
-                    price: 999,
-                    imagePath: require(`../../assets/apple-macbook-2020-13in-silver.png`),
-                    route: '/product/apple-macbook-pro-13-2020',
-                },
-                {
-                    productName: 'Template',
-                    price: 999,
-                    imagePath: require(`../../assets/apple-macbook-2020-13in-silver.png`),
-                    route: '/product/apple-macbook-pro-13-2020',
-                },
-            ],
+            
+            
             gallerySlide: 'GallerySlide1',
         }
     },
@@ -149,6 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$gradient: linear-gradient(90deg, rgba(173, 203, 203, 1) 0%, rgba(208, 251, 251, 1) 100%);
 
 .gallery-enter-active {
     transition: all 1s ease-out;

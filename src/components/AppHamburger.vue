@@ -1,13 +1,6 @@
 <template>
-    <aside>
-        <router-link to="/shipping">Shipping</router-link>
-        <router-link to="/payment">Payment</router-link>
-        <router-link to="/return">Return</router-link>
-        <router-link to="/faq">FAQ</router-link>
-        <router-link v-if="!isSignedIn" id="sign-in" to="/login">Sign in</router-link>
-    </aside>
-    <header>
-        <router-link to="/"><svg xmlns="http://www.w3.org/2000/svg" width="336" height="114" fill="none"
+    <div id="menu">
+         <router-link to="/"><svg xmlns="http://www.w3.org/2000/svg" width="336" height="114" fill="none"  
                 viewBox="0 0 336 114">
                 <rect width="114" height="114" fill="url(#paint0_linear)" rx="10" />
                 <path fill="#414045"
@@ -26,222 +19,71 @@
                     </linearGradient>
                 </defs>
             </svg></router-link>
-        <div id="search-div" :class="{active: searchQuery !== ''}">
-            <input type="text" name="search" id="search" v-model="searchQuery"
-                placeholder="Search for items..."><button>Search</button><button>
-                <mdicon name="magnify" size="20" />
-            </button>
-        </div>
-        <div class="header-tabs">
-            <div class="search">
-                <mdicon name="magnify" size="35" />
-            </div>
-            <div class="cart">
-                <mdicon name="cart" size="20" />
-            </div>
-            <div class="menu" @click="toggleHam">
-                <mdicon name="menu" size="20"></mdicon>
-            </div>
-        </div>
-    </header>
+            <router-link to="/login">Sign in</router-link>
+            
+            <router-link to="/shipping">Shipping</router-link>
+            <router-link to="/payment">Payment</router-link>
+            <router-link to="/return">Return</router-link>
+            
+            <router-link to="/faq">FAQ</router-link>
+            <router-link to="/contact">Contact</router-link>
+
+    </div>
+
 </template>
 
 <script>
 export default {
-    name: 'AppHeader',
-    data() {
-        return {
-            searchQuery: '',
-        }
-    },
+    name: 'AppHamburger',
     methods: {
         toggleHam() {
             this.$store.commit('toggleHam');
-        }
-    }
+        },
+    },
 }
 </script>
 
 <style lang="scss" scoped>
-$gradient: linear-gradient(90deg, rgba(173, 203, 203, 1) 0%, rgba(208, 251, 251, 1) 100%);
-header {
-    background-color: #29282d;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 2rem;
-    gap: 1rem;
-    position: sticky;
+#menu {
+    position: fixed;
     top: 0;
-    z-index: 1;
-    width: 100%;
-
-    a {
-        height: 70px;
-        // overflow: hidden;
-    }
-
-    a svg {
-        height: 70px;
-        width: 120px;
-    }
-}
-
-aside {
-    background-color: #262529;
+    right: 0;
+    bottom: 0;
+    max-width: 200px;
+    background-color: #29282d;
+    color: #fff;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 2rem;
-    gap: 1rem;
-    color: whitesmoke;
-    width: 100%;
-    padding: 5px 32px;
-
-    a {
-        text-decoration: none;
-        color: #f5f5f5;
-
-        &:hover {
-            color: #fff4f4;
-            text-decoration: underline;
-        }
-    }
-
-    #sign-in {
-        border: 1px solid #f5f5f5;
-        padding: 5px 10px;
-        border-radius: 5px;
-
-        &:hover {
-            background-color: #f5f5f5;
-            color: #262529;
-            text-decoration: none;
-        }
-    }
-}
-
-input {
-    background-color: #424148;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    padding: 10px;
-    color: #f5f5f5;
-}
-
-
-#search-div {
-    &.active {
-        button {
-            background-image: $gradient;
-            color: #262529;
-            transition: box-shadow 0.07s ease-out;
-            &:hover {
-                box-shadow: 0px 0px 60px rgba(208, 251, 251, 0.352);
-            }
-        }
-    }
-    flex: 4;
-    display: flex;
-    max-width: 900px;
-
-    button {
-        flex: 1;
-        border: none;
-        outline: none;
-        background-color: #363639;
-        color: #f5f5f5;
-        border-radius: 0 5px 5px 0;
-        padding: 10px 0px;
-        cursor: pointer;
-        // max-width: 1000px;
-
-        &:hover {
-            background-color: #f5f5f5;
-            color: #262529;
-        }
-
-        &:last-child {
-            display: none;
-            min-width: 20px;
-        }
-    }
-}
-
-input {
-    flex: 10;
-    // max-width: 1500px;
-    border-radius: 5px 0 0 5px;
-}
-
-.header-tabs {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
     gap: 10px;
+    z-index: 101;
+    padding: 20px;
 }
 
-.cart {
-    border-radius: 5px;
-    padding: 10px;
-    color: #f5f5f5;
-
-    background-color: #424148;
+svg {
+    max-width: 100%;
 }
 
-.search {
-    color: #f5f5f5;
-    display: none;
-}
-
-.menu {
-    display: none;
-    color: #f5f5f5;
+a {
+    color: #fff;
     background-color: #424148;
     border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-}
-
-@media only screen and (max-width: 964px) {
-    aside {
-        display: none;
-    }
-
-    .menu {
-        display: block;
-    }
-
-    header {
-        justify-content: space-between;
+    padding: 20px;
+    text-align: center;
+    &:first-child {
+        background-color: transparent;
+        padding: 0;
     }
 }
 
-@media only screen and (max-width: 928px) {
-    #search-div {
-        button {
-            &:nth-child(2) {
-                display: none;
-            }
-
-            &:last-child {
-                display: block;
-            }
-
-        }
+@media only screen and (max-width: 400px) {
+    #menu {
+        min-width: 100%;
+    }
+    svg {
+        max-width: 200px;
+        min-width: 50px;
     }
 }
 
-@media only screen and (max-width: 542px) {
-
-
-    #search-div {
-        display: none;
-    }
-
-    .search {
-        display: block;
-    }
-}
 </style>
