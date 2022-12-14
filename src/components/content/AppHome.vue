@@ -12,7 +12,7 @@
             </div>
             <div class="carousel">
                 <div class="gallery">
-                    <router-link to="/phones">
+                    <router-link to="/">
                         <Transition name="gallery" mode="out-in">
                             <component :is="gallerySlide"></component>
                         </Transition>
@@ -30,7 +30,7 @@
             <div class="deals-flex">
                 <router-link :to="deal.route" class="deal" v-for="deal in $store.state.deals" :key="deal">
                     <img :src="deal.imagePath" :alt="deal.productName">
-                    <span>{{ deal.productName }}</span>
+                    <span class="deal-name">{{ deal.productName }}</span>
                     <span>${{ deal.price }}</span>
                 </router-link>
             </div>
@@ -48,13 +48,13 @@ export default {
         GallerySlide1,
         GallerySlide2,
     },
-    methods: {},
     data() {
         return {
-            
-            
             gallerySlide: 'GallerySlide1',
+
         }
+    },
+    methods: {
     },
     mounted() {
         setInterval(() => {
@@ -80,12 +80,12 @@ $gradient: linear-gradient(90deg, rgba(173, 203, 203, 1) 0%, rgba(208, 251, 251,
 }
 .gallery-leave-to {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateX(-100px);
 }
 
 .gallery-enter-from {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateX(100px);
 }
 
 .home {
@@ -104,6 +104,7 @@ h2 {
     justify-content: space-between;
     gap: 100px;
     justify-items: center;
+    margin-bottom: 50px;
 }
 
 .categories {
@@ -113,6 +114,7 @@ h2 {
     gap: 1rem;
     width: 100%;
     max-width: 300px;
+    margin-top: 20px;
 
     .list {
         display: flex;
@@ -152,14 +154,15 @@ h2 {
 .deals-flex {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: space-around;
         gap: 20px;
         margin-top: 10px;
 
         .deal {
-            // flex: 2?;
+            // flex: 1;
             flex-grow: 1;
             flex-shrink: 0;
+            // flex-basis: 25%;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -169,11 +172,20 @@ h2 {
             max-width: 200px;
             padding: 10px;
             border-radius: 8px;
+            height: 200px;
             cursor: pointer;
             transition: box-shadow 0.2s ease-out;
                 background-image: linear-gradient(90deg, #adcbcb 0%, rgba(208, 251, 251, 1) 100%);
                 box-shadow: 4px 24px 60px #d0fbfb;
                 transition: box-shadow 0.2s ease-out;
+
+            .deal-name {
+                max-width: 100%;
+                height: 25px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
 
             &:hover {
                 background-image: linear-gradient(90deg, #C1D7D7 0%, #ECFDFD 100%);
@@ -184,7 +196,7 @@ h2 {
                 width: 100%;
                 max-width: 150px;
                 height: 100%;
-                max-height: 150px;
+                max-height: 130px;
                 object-fit: contain;
                 align-self: center;
             }
@@ -232,6 +244,9 @@ h2 {
         .carousel, .gallery {
             width: 100%;
         }
+        .gallery {
+            max-height: 500px;
+        }
         .carousel {
             overflow-x: hidden;
         }
@@ -246,6 +261,40 @@ h2 {
     .categories .list .item {
         background-color: #e9e9e9;
         padding: 15px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .deals-flex {
+        // flex-direction: column;
+        align-items: center;
+        // gap: 20px;
+        .deal {
+            // max-width: 100%;
+            height: 200px;
+            max-width: 45%;
+            // flex: 2;
+        }
+    }
+}
+
+// @media only screen and (max-width: 444px) {
+//     .deals-flex {
+//         gap: 5px;
+//         justify-content: center;
+//         .deal {
+//             // max-width: 100%;
+//         }
+//     }
+// }
+@media only screen and (max-width: 389px) {
+    .deals-flex {
+        gap: 10px;
+        justify-content: center;
+        .deal {
+            max-width: 100%;
+            min-width: 100%;
+        }
     }
 }
 

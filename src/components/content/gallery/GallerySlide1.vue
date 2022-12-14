@@ -17,12 +17,14 @@ h2 {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    text-align: right;
 }
 
 h3 {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1.2rem;
+    text-align: right;
 }
 p {
     font-size: 1rem;

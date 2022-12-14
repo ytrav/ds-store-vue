@@ -1,5 +1,6 @@
 <template>
     <div id="menu">
+        <mdicon @click="toggleHam" id="hamback" name="backburger" size="30" />
          <router-link to="/"><svg xmlns="http://www.w3.org/2000/svg" width="336" height="114" fill="none"  
                 viewBox="0 0 336 114">
                 <rect width="114" height="114" fill="url(#paint0_linear)" rx="10" />
@@ -27,7 +28,6 @@
             
             <router-link to="/faq">FAQ</router-link>
             <router-link to="/contact">Contact</router-link>
-
     </div>
 
 </template>
@@ -44,20 +44,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$gradient: linear-gradient(90deg, rgba(173, 203, 203, 1) 0%, rgba(208, 251, 251, 1) 100%);
+
+
 #menu {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
+    // height: calc(100vh + 100px);
     max-width: 200px;
     background-color: #29282d;
     color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: auto;
     gap: 10px;
     z-index: 101;
     padding: 20px;
+}
+
+#hamback {
+    position: fixed;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: #424148;
+    padding: 20px;
+    border-radius: 0 5px 5px 0;
+    &:hover {
+        background-image: $gradient;
+        color: #29282d;
+    }
 }
 
 svg {
@@ -70,15 +90,49 @@ a {
     border-radius: 5px;
     padding: 20px;
     text-align: center;
-    &:first-child {
+    transition: box-shadow 0.05s ease;
+    &:nth-child(2) {
         background-color: transparent;
         padding: 0;
+        &:hover {
+            background-image: none;
+        }
+        &:active {
+            box-shadow: none;
+        }
     }
+    &:hover {
+        background-image: $gradient;
+        color: #29282d;
+    }
+    &:active {
+        box-shadow: 0px 0px 60px rgba(208, 251, 251, 0.352);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #menu {
+        min-width: 50vw;
+    }
+}
+
+@media only screen and (max-width: 532px) {
+    #menu {
+        min-width: 60vw;
+    }
+    
 }
 
 @media only screen and (max-width: 400px) {
     #menu {
         min-width: 100%;
+        a {
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+    }
+    #hamback {
+        display: block;
     }
     svg {
         max-width: 200px;
@@ -86,4 +140,24 @@ a {
     }
 }
 
+@media only screen and (max-width: 340px) {
+    svg {
+        max-width: 150px;
+        min-width: 50px;
+    }
+        #menu a {
+            margin-left: 0;
+            margin-right: 0;
+        }
+}
+
+@media only screen and (max-width: 290px) {
+    svg {
+        max-width: 100px;
+        min-width: 50px;
+    }
+    #hamback {
+        background-color: #4241489c;
+    }
+}
 </style>
